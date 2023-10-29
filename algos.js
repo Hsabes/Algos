@@ -1,4 +1,82 @@
-// Word a10n (abbreviation)
+// Directions Reduction (5 Kyu)
+
+// Once upon a time, on a way through the old wild mountainous west,…
+// … a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too.
+
+// Going to one direction and coming back the opposite direction right away is a needless effort. Since this is the wild west, with dreadful weather and not much water, it's important to save yourself some energy, otherwise you might die of thirst!
+
+// How I crossed a mountainous desert the smart way.
+// The directions given to the man are, for example, the following (depending on the language):
+
+// ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"].
+// or
+// { "NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST" };
+// or
+// [North, South, South, East, West, North, West]
+// You can immediately see that going "NORTH" and immediately "SOUTH" is not reasonable, better stay to the same place! So the task is to give to the man a simplified version of the plan. A better plan in this case is simply:
+
+// ["WEST"]
+// or
+// { "WEST" }
+// or
+// [West]
+// Other examples:
+// In ["NORTH", "SOUTH", "EAST", "WEST"], the direction "NORTH" + "SOUTH" is going north and coming back right away.
+
+// The path becomes ["EAST", "WEST"], now "EAST" and "WEST" annihilate each other, therefore, the final result is [] (nil in Clojure).
+
+// In ["NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST"], "NORTH" and "SOUTH" are not directly opposite but they become directly opposite after the reduction of "EAST" and "WEST" so the whole path is reducible to ["WEST", "WEST"].
+
+// Task
+// Write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N side by side).
+
+function dirReduc(arr){
+
+    const BAD_DIRECTIONS = [
+      ['NORTH', 'SOUTH'],
+      ['SOUTH', 'NORTH'],
+      ['EAST', 'WEST'],
+      ['WEST', 'EAST']
+    ]
+  
+    for (let i = 0; i < arr.length; i++){
+      if (arr[i] + arr[i + 1] === BAD_DIRECTIONS[0].join('') || arr[i] + arr[i + 1] === BAD_DIRECTIONS[1].join('') || arr[i] + arr[i + 1] === BAD_DIRECTIONS[2].join('') || arr[i] + arr[i + 1] === BAD_DIRECTIONS[3].join('')){
+        arr.splice(i, 2)
+        dirReduc(arr)
+      }
+    }
+  
+    return arr;
+  
+}
+
+function dirReduc(arr){
+
+    const BAD_DIRECTIONS = [
+      ['NORTH', 'SOUTH'],
+      ['SOUTH', 'NORTH'],
+      ['EAST', 'WEST'],
+      ['WEST', 'EAST']
+    ]
+  
+    for (let i = 0; i < arr.length; i++){
+      for (let j = 0; j < BAD_DIRECTIONS.length; j++){
+        if (arr[i] + arr[i + 1] === BAD_DIRECTIONS[j].join('')){
+          arr.splice(i, 2);
+          dirReduc(arr);
+        }
+      }
+    }
+  
+    return arr;
+  
+}
+
+// ================================================
+// ************************************************
+// ================================================
+
+// Word a10n (abbreviation) (6 Kyu)
 
 // The word i18n is a common abbreviation of internationalization in the developer community, used instead of typing the whole word and trying to spell it correctly. Similarly, a11y is an abbreviation of accessibility.
 // Write a function that takes a string and turns any and all "words" (see below) within that string of length 4 or greater into an abbreviation, following these rules:
@@ -44,7 +122,7 @@ function handleDashes(word){
 // ************************************************
 // ================================================
 
-// Encrypt this!
+// Encrypt this! (6 Kyu)
 
 // You want to create secret messages which can be deciphered by the Decipher this! kata. Here are the conditions:
 // Your message is a string containing space separated words.
@@ -77,7 +155,7 @@ var encryptThis = function(text) {
 // ************************************************
 // ================================================
 
-// Write Number in Expanded Form
+// Write Number in Expanded Form (6 Kyu)
 
 // You will be given a number and you will need to return it as a string in Expanded Form. For example:
 
@@ -105,3 +183,36 @@ function expandedForm(num) {
 // ================================================
 // ************************************************
 // ================================================
+
+// Maximum Product (7 Kyu)
+
+// Given an array of integers, find the maximum product obtained from multiplying 2 adjacent numbers in the array
+// Array/list size is at least 2
+// Array/list numbers could be a mixture of positives, negatives also zeroes
+// adjacentElementsProduct([1, 2, 3]); ==> return 6
+// adjacentElementsProduct([9, 5, 10, 2, 24, -1, -48]); ==> return 50
+
+function adjacentElementsProduct(array) {
+    let result = -1000000000000000
+    for (let i = 0; i < array.length - 1; i++){
+      if (result < array[i] * array[i + 1]){
+        result = array[i] * array[i + 1]
+      }
+    }
+    return result;
+}
+
+function adjacentElementsProduct(array) {
+    let result = array[0] * array[1]
+    for (let i = 1; i < array.length - 1; i++){
+      if (result < array[i] * array[i + 1]){
+        result = array[i] * array[i + 1]
+      }
+    }
+    return result;
+}
+
+// ================================================
+// ************************************************
+// ================================================
+
