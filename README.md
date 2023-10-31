@@ -5,7 +5,7 @@ Each problem will be structured as follows:
 
 Poblem Title (Problem Difficulty)
 Problem Description
-Solution
+Solution (some may include commentary on new things I learned while solving that particular problem)
 Problem Link (Credit)
 
 Many of these problems I revisit as my skill progresses, but previous solutions will not be overwritten. Every solution you see is my own, and is not assisted by AI or other solutions.

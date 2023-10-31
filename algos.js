@@ -277,3 +277,30 @@ function multipleOfIndex(array) {
 // ================================================
 // ************************************************
 // ================================================
+
+// Consecutive Strings (6 Kyu)
+
+function permute(array) {
+  var length = array.length, // length of array
+      result = [array.slice()], // nests original array inside a new array
+      c = new Array(length).fill(0), // fills a new array with N 0's
+      i = 1, k, p; // initializes 3 variables. i = 0, k = undefined, p = undefined
+
+  while (i < length) { // while i < length
+    if (c[i] < i) { // if array filled with 0's at index of [i] (initially 0) is less than i (intially 1) (guaranteed to run the first time)
+      k = i % 2 && c[i]; // if i is even, set value of k to 0. If it is odd, set it to the value of c[i]
+      p = array[i]; // temporarily saves the value of array[i]
+      array[i] = array[k]; // changes the value of array[i] () to array[k]
+      array[k] = p;
+      c[i]++;
+      i = 1;
+      result.push(array.slice());
+    } else {
+      c[i] = 0;
+      i++;
+    }
+  }
+  return result;
+}
+
+console.log(permute([1, 2, 3]));
