@@ -304,3 +304,35 @@ function permute(array) {
 }
 
 console.log(permute([1, 2, 3]));
+
+// ================================================
+// ************************************************
+// ================================================
+
+// Kebabize (6 Kyu)
+
+// Modify the kebabize function so that it converts a camel case string into a kebab case.
+
+// "camelsHaveThreeHumps"  -->  "camels-have-three-humps"
+// "camelsHave3Humps"  -->  "camels-have-humps"
+// "CAMEL"  -->  "c-a-m-e-l"
+// Notes:
+
+// the returned string should only contain lowercase letters
+
+function kebabize(str) {
+  str = str[0].toLowerCase() + str.substring(1);
+  return str.replace(/[^a-zA-Z]/g, "").split("").map((letter) => {
+    if (letter === letter.toUpperCase()){
+      return letter = `-${letter.toLowerCase()}`
+    } else {
+      return letter;
+    }
+  }).join("");
+}
+
+function kebabize(str) {
+  return str.replace(/\d/g, '').replace(/\B[A-Z]/g, (letter) => `-${letter}`).toLowerCase();
+}
+
+// https://www.codewars.com/kata/57f8ff867a28db569e000c4a (user4316848)
