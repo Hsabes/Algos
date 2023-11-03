@@ -1,9 +1,11 @@
 // Directions Reduction (5 Kyu)
 
 // Once upon a time, on a way through the old wild mountainous west,…
-// … a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too.
+// … a man was given directions to go from one point to another. 
+// The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too.
 
-// Going to one direction and coming back the opposite direction right away is a needless effort. Since this is the wild west, with dreadful weather and not much water, it's important to save yourself some energy, otherwise you might die of thirst!
+// Going to one direction and coming back the opposite direction right away is a needless effort. 
+// Since this is the wild west, with dreadful weather and not much water, it's important to save yourself some energy, otherwise you might die of thirst!
 
 // How I crossed a mountainous desert the smart way.
 // The directions given to the man are, for example, the following (depending on the language):
@@ -74,9 +76,9 @@ function dirReduc(arr){
 
 // https://www.codewars.com/kata/550f22f4d758534c1100025a (g964)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Word a10n (abbreviation) (6 Kyu)
 
@@ -120,9 +122,9 @@ function handleDashes(word){
 
 // https://www.codewars.com/kata/5375f921003bf62192000746 (wthit56)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Encrypt this! (6 Kyu)
 
@@ -153,9 +155,9 @@ var encryptThis = function(text) {
 
 // https://www.codewars.com/kata/5848565e273af816fb000449 (suic)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Write Number in Expanded Form (6 Kyu)
 
@@ -182,9 +184,9 @@ function expandedForm(num) {
 
 // https://www.codewars.com/kata/5842df8ccbd22792a4000245 (Belax8)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Maximum Product (7 Kyu)
 
@@ -216,9 +218,9 @@ function adjacentElementsProduct(array) {
 
 // https://www.codewars.com/kata/5a4138acf28b82aa43000117 (MrZizoScream)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Bouncing Balls (6 Kyu)
 
@@ -260,9 +262,9 @@ function bouncingBall(h,  bounce,  window) {
 
 // https://www.codewars.com/kata/5544c7a5cb454edb3c000047 (g964)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Multiple of Index (8 Kyu) (Despite it being an easy problem, I really liked it!)
 
@@ -274,9 +276,9 @@ function multipleOfIndex(array) {
 
 // https://www.codewars.com/kata/5a34b80155519e1a00000009 (Dmitry Kudla)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Consecutive Strings (6 Kyu)
 
@@ -305,9 +307,9 @@ function permute(array) {
 
 console.log(permute([1, 2, 3]));
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Kebabize (6 Kyu)
 
@@ -337,9 +339,9 @@ function kebabize(str) {
 
 // https://www.codewars.com/kata/57f8ff867a28db569e000c4a (user4316848)
 
-// ================================================
-// ************************************************
-// ================================================
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // Count characters in your string (6 Kyu)
 
@@ -367,3 +369,78 @@ function count(string) {
 }
 
 // https://www.codewars.com/kata/52efefcbcdf57161d4000091 (riston)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Highest Rank Number in an Array (6 Kyu)
+
+// Complete the method which returns the number which is most frequent in the given input array. 
+// If there is a tie for most frequent number, return the largest number among them.
+
+// Note: no empty arrays will be given.
+
+function highestRank(arr){
+  const accum = {}
+  arr.forEach((num) => accum[num] = (accum[num] || 0) + 1);
+  return parseInt(Object.keys(accum).reduce((a, b) => accum[a] > accum[b] ? a : b));
+}
+
+// https://www.codewars.com/kata/5420fc9bb5b2c7fd57000004 (KK20994)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Alternate Case (7 Kyu)
+
+// Write function alternateCase which switch every letter in string from upper to lower and from lower to upper. 
+// E.g: Hello World -> hELLO wORLD
+
+function alternateCase(s) {
+  return s.split("")
+    .map((c) => c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase())
+    .join("");
+}
+
+// https://www.codewars.com/kata/57a62154cf1fa5b25200031e (wichu)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// How old will I be in 2099? (8 Kyu)
+
+// Philip's just turned four and he wants to know how old he will be in various years in the future such as 2090 or 3044. 
+// His parents can't keep up calculating this so they've begged you to help them out by writing a programme that can answer Philip's endless questions.
+
+// Your task is to write a function that takes two parameters: the year of birth and the year to count years in relation to. 
+// As Philip is getting more curious every day he may soon want to know how many years it was until he would be born, so your function needs to work with both dates in the future and in the past.
+
+// Provide output in this format: For dates in the future: "You are ... year(s) old." 
+// For dates in the past: "You will be born in ... year(s)." If the year of birth equals the year requested return: "You were born this very year!"
+
+// "..." are to be replaced by the number, followed and proceeded by a single space. 
+// Mind that you need to account for both "year" and "years", depending on the result.
+
+function plural(x, y){
+  if (y > x){
+    return y - x === 1 ? '' : 's';  
+  } else {
+    return x - y === 1 ? '' : 's';  
+  }
+}
+
+function  calculateAge(x, y) {
+  if (x === y){
+    return 'You were born this very year!'
+  }
+  return y > x ? `You are ${y - x} year${plural(x, y)} old.` : `You will be born in ${x - y} year${plural(x, y)}.`
+}
+
+// https://www.codewars.com/kata/5761a717780f8950ce001473 (ijelonek)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
