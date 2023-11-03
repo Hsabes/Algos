@@ -336,3 +336,34 @@ function kebabize(str) {
 }
 
 // https://www.codewars.com/kata/57f8ff867a28db569e000c4a (user4316848)
+
+// ================================================
+// ************************************************
+// ================================================
+
+// Count characters in your string (6 Kyu)
+
+// The main idea is to count all the occurring characters in a string. 
+// If you have a string like aba, then the result should be {'a': 2, 'b': 1}.
+// What if the string is empty? Then the result should be empty object literal, {}.
+
+function count (string) {  
+  if (string){
+    string = string.split('');
+    let counts = {}
+    for (const letter of string){
+      counts[letter] = counts[letter] ? counts[letter] + 1 : 1;
+    }
+    return counts;
+  } else {
+    return {};
+  }
+}
+
+function count(string) {
+  const obj = {};
+  string.split("").forEach((char) => obj[char] = (obj[char] || 0) + 1);
+  return obj;
+}
+
+// https://www.codewars.com/kata/52efefcbcdf57161d4000091 (riston)
