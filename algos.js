@@ -169,17 +169,29 @@ var encryptThis = function(text) {
 // NOTE: All numbers will be whole numbers greater than 0.
 
 function expandedForm(num) {
-    num = num.toString();
-    let zero = "0";
-    let nums = [];
-    let x = 0;
-    for (i = num.length - 1; i >= 0; i--){
-      if (num[x] !== zero){
-        nums.push(`${num[x]}${zero.repeat(i)}`);
-      }
-      x++;
+  num = num.toString();
+  let nums = [];
+  for (i = 0; i < num.length; i++){
+    if (num[i] !== '0'){
+      nums.push(`${num[i]}${'0'.repeat(num.length - i - 1)}`);
+    } else {
+      nums.push('0'); // optional
     }
-    return nums.join(" + ")
+  }
+  return nums.join(" + ")
+}
+
+function expandedForm(num) {
+  num = num.toString();
+  let nums = [];
+  let x = 0;
+  for (i = num.length - 1; i >= 0; i--){
+    if (num[x] !== 0){
+      nums.push(`${num[x]}${'0'.repeat(i)}`);
+    }
+    x++;
+  }
+  return nums.join(" + ")
 }
 
 // https://www.codewars.com/kata/5842df8ccbd22792a4000245 (Belax8)
