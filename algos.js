@@ -34,6 +34,28 @@
 
 function dirReduc(arr){
 
+  const BAD_DIRECTIONS = [
+    ['NORTH', 'SOUTH'],
+    ['SOUTH', 'NORTH'],
+    ['EAST', 'WEST'],
+    ['WEST', 'EAST']
+  ]
+
+  for (let i = 0; i < arr.length; i++){
+    for (let j = 0; j < BAD_DIRECTIONS.length; j++){
+      if (arr[i] + arr[i + 1] === BAD_DIRECTIONS[j].join('')){
+        arr.splice(i, 2);
+        dirReduc(arr);
+      }
+    }
+  }
+
+  return arr;
+
+}
+
+function dirReduc(arr){
+
     const BAD_DIRECTIONS = [
       ['NORTH', 'SOUTH'],
       ['SOUTH', 'NORTH'],
@@ -47,31 +69,9 @@ function dirReduc(arr){
         dirReduc(arr)
       }
     }
-  
-    return arr;
-  
-}
 
-function dirReduc(arr){
-
-    const BAD_DIRECTIONS = [
-      ['NORTH', 'SOUTH'],
-      ['SOUTH', 'NORTH'],
-      ['EAST', 'WEST'],
-      ['WEST', 'EAST']
-    ]
-  
-    for (let i = 0; i < arr.length; i++){
-      for (let j = 0; j < BAD_DIRECTIONS.length; j++){
-        if (arr[i] + arr[i + 1] === BAD_DIRECTIONS[j].join('')){
-          arr.splice(i, 2);
-          dirReduc(arr);
-        }
-      }
-    }
-  
     return arr;
-  
+    
 }
 
 // https://www.codewars.com/kata/550f22f4d758534c1100025a (g964)
