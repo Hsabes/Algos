@@ -34,16 +34,16 @@
 
 function dirReduc(arr){
 
-  const BAD_DIRECTIONS = [
+  const badDirections = [
     ['NORTH', 'SOUTH'],
     ['SOUTH', 'NORTH'],
     ['EAST', 'WEST'],
     ['WEST', 'EAST']
   ]
 
-  for (let i = 0; i < arr.length; i++){
-    for (let j = 0; j < BAD_DIRECTIONS.length; j++){
-      if (arr[i] + arr[i + 1] === BAD_DIRECTIONS[j].join('')){
+  for (let i = 0; i < arr.length - 1; i++){
+    for (let j = 0; j < badDirections.length; j++){
+      if (arr[i] + arr[i + 1] === badDirections[j].join('')){
         arr.splice(i, 2);
         dirReduc(arr);
       }
@@ -53,6 +53,8 @@ function dirReduc(arr){
   return arr;
 
 }
+
+console.log(dirReduc(['NORTH', 'WEST', 'EAST', 'SOUTH']))
 
 function dirReduc(arr){
 
@@ -452,6 +454,27 @@ function  calculateAge(x, y) {
 }
 
 // https://www.codewars.com/kata/5761a717780f8950ce001473 (ijelonek)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Alternate Capitalization (7 Kyu)
+
+// Given a string, capitalize the letters that occupy even indexes and odd indexes separately, and return as shown below. Index 0 will be considered even.
+
+// For example, capitalize("abcdef") = ['AbCdEf', 'aBcDeF']. See test cases for more examples.
+
+// The input will be a lowercase string with no spaces.
+
+function capitalize(s){
+  return [
+    [...s].map((letter, index) => index % 2 === 0 ? letter.toUpperCase() : letter).join(""),
+    [...s].map((letter, index) => index % 2 !== 0 ? letter.toUpperCase() : letter).join(""),
+  ];
+};
+
+// https://www.codewars.com/kata/59cfc000aeb2844d16000075 (KenKamau)
 
 // ================================================================================================
 // ************************************************************************************************
