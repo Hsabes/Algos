@@ -471,7 +471,7 @@ function capitalize(s){
   return [
     [...s].map((letter, index) => index % 2 === 0 ? letter.toUpperCase() : letter).join(""),
     [...s].map((letter, index) => index % 2 !== 0 ? letter.toUpperCase() : letter).join(""),
-  ];
+  ] || 'Invalid input';
 };
 
 // https://www.codewars.com/kata/59cfc000aeb2844d16000075 (KenKamau)
