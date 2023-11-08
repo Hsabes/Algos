@@ -470,11 +470,36 @@ function  calculateAge(x, y) {
 function capitalize(s){
   return [
     [...s].map((letter, index) => index % 2 === 0 ? letter.toUpperCase() : letter).join(""),
-    [...s].map((letter, index) => index % 2 !== 0 ? letter.toUpperCase() : letter).join(""),
-  ] || 'Invalid input';
+    [...s].map((letter, index) => index % 2 !== 0 ? letter.toUpperCase() : letter).join("")
+  ];
 };
 
 // https://www.codewars.com/kata/59cfc000aeb2844d16000075 (KenKamau)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Are they the "same"? (6 Kyu)
+
+// Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities (the multiplicity of a member is the number of times it appears). 
+// "Same" means, here, that the elements in b are the elements in a squared, regardless of the order.
+
+function comp(array1, array2){
+  if (array1 === null || array2 === null){
+    return false;
+  }
+  array1.sort((x, y) => x - y);
+  array2.sort((x, y) => x - y);
+  for (let i = 0; i < array1.length; i++){
+    if (array2[i] !== array1[i] * array1[i]){
+      return false;
+    }
+  }
+  return true;
+}
+
+// https://www.codewars.com/kata/550498447451fbbd7600041c (g964)
 
 // ================================================================================================
 // ************************************************************************************************
