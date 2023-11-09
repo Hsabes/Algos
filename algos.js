@@ -263,10 +263,10 @@ function bouncingBall(h,  bounce,  window) {
   if (h <= 0 || (bounce <= 0 || bounce >= 1) || window >= h){
     return -1;
   }
-  let result = 0;
+  let result = 0; // numberOfBounces, bounceCount
   do {
     result++
-    h = h * bounce;
+    h *= bounce;
     if (h > window){
       result++
     } 
@@ -500,6 +500,70 @@ function comp(array1, array2){
 }
 
 // https://www.codewars.com/kata/550498447451fbbd7600041c (g964)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// The Vowel Code (6 Kyu)
+
+// Step 1: Create a function called encode() to replace all the lowercase vowels in a given string with numbers according to the following pattern:
+
+// a -> 1
+// e -> 2
+// i -> 3
+// o -> 4
+// u -> 5
+
+// For example, encode("hello") would return "h2ll4". There is no need to worry about uppercase vowels in this kata.
+
+// Step 2: Now create a function called decode() to turn the numbers back into vowels according to the same pattern shown above.
+
+// For example, decode("h3 th2r2") would return "hi there".
+
+// For the sake of simplicity, you can assume that any numbers passed into the function will correspond to vowels.
+
+function encode(string) {
+  const code = {
+    'a': 1,
+    'e': 2,
+    'i': 3,
+    'o': 4,
+    'u': 5
+  };
+  let encodedStr = "";
+  for (let i = 0; i < string.length; i++){
+    let char = string[i];
+    if (/[aeiou]/.test(char)){
+      encodedStr += code[char];
+    } else {
+      encodedStr += char;
+    }
+  }
+  return encodedStr;
+}
+
+function decode(string) {
+    const code = {
+    '1': 'a',
+    '2': 'e',
+    '3': 'i',
+    '4': 'o',
+    '5': 'u'
+  };
+  let decodedStr = "";
+  for (let i = 0; i < string.length; i++){
+    let char = string[i];
+    if (/[1-5]/.test(char)){
+      decodedStr += code[char];
+    } else {
+      decodedStr += char;
+    }
+  }
+  return decodedStr;
+}
+
+// https://www.codewars.com/kata/53697be005f803751e0015aa (yaphi1)
 
 // ================================================================================================
 // ************************************************************************************************
