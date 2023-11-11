@@ -416,14 +416,20 @@ function alternateCase(s) {
   let alternateCaseString = "";
   for (let i = 0; i < s.length; i++){
     let char = s[i];
-    if (char === char.toLowerCase()){
+    if (char === char.toLowerCase() && char !== char.toUpperCase()){
+      // This condition will return true if the character is lower case, and false for all other characters
+      // E.g "=", "3", "-", etc will all return false
+      // Alternatively, char === char.toLowerCase() alone would suffice for this problem
       alternateCaseString += char.toUpperCase();
+      
     } else {
       alternateCaseString += char.toLowerCase();
     }
   }
   return alternateCaseString;
 }
+
+console.log(alternateCase("3"))
 
 function alternateCase(s) {
   return s.split("")
