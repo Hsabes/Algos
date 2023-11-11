@@ -413,6 +413,19 @@ function highestRank(arr){
 // E.g: Hello World -> hELLO wORLD
 
 function alternateCase(s) {
+  let alternateCaseString = "";
+  for (let i = 0; i < s.length; i++){
+    let char = s[i];
+    if (char === char.toLowerCase()){
+      alternateCaseString += char.toUpperCase();
+    } else {
+      alternateCaseString += char.toLowerCase();
+    }
+  }
+  return alternateCaseString;
+}
+
+function alternateCase(s) {
   return s.split("")
     .map((c) => c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase())
     .join("");
@@ -525,11 +538,11 @@ function comp(array1, array2){
 
 function encode(string) {
   const code = {
-    'a': 1,
-    'e': 2,
-    'i': 3,
-    'o': 4,
-    'u': 5
+    'a': '1',
+    'e': '2',
+    'i': '3',
+    'o': '4',
+    'u': '5'
   };
   let encodedStr = "";
   for (let i = 0; i < string.length; i++){
