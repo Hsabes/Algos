@@ -401,6 +401,19 @@ function highestRank(arr){
   return parseInt(Object.keys(accum).reduce((a, b) => accum[a] > accum[b] ? a : b));
 }
 
+function highestRank(arr){
+  const accum = {};
+  for (let i = 0; i < arr.length; i++){
+    let key = arr[i];
+    if (accum[key]){
+      accum[key]++
+    } else {
+      accum[key] = 1;
+    }
+  }
+  return parseInt(Object.keys(accum).reduce((a, b) => accum[a] > accum[b] ? a : b));
+}
+
 // https://www.codewars.com/kata/5420fc9bb5b2c7fd57000004 (KK20994)
 
 // ================================================================================================
@@ -428,8 +441,6 @@ function alternateCase(s) {
   }
   return alternateCaseString;
 }
-
-console.log(alternateCase("3"))
 
 function alternateCase(s) {
   return s.split("")
