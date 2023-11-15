@@ -351,6 +351,29 @@ function kebabize(str) {
   return str.replace(/\d/g, '').replace(/\B[A-Z]/g, (letter) => `-${letter}`).toLowerCase();
 }
 
+function checkUpperCase(char){
+  return char === char.toUpperCase() && char !== char.toLowerCase();
+}
+
+function checkLowerCase(char){
+  return char === char.toLowerCase() && char !== char.toUpperCase();
+}
+
+function kebabize(str){
+  let kebab = `${str.match(/[a-zA-Z]/)[0].toLowerCase()}`;
+  for (let i = str.match(/[a-zA-Z]/).index + 1; i < str.length; i++){
+    let char = str[i];
+    if (checkUpperCase(char)){
+      kebab += `-${char.toLowerCase()}`
+    } else if (checkLowerCase(char)){
+      kebab += char;
+    }
+  }
+  return kebab;
+}
+
+console.log(kebabize("3CAMEL"))
+
 // https://www.codewars.com/kata/57f8ff867a28db569e000c4a (user4316848)
 
 // ================================================================================================
