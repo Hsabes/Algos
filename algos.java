@@ -40,3 +40,46 @@ class CombineHashMaps {
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
+
+class codeChallenge {
+    
+    // Write a method called stringToBinary(). 
+    // This method should return a String, and accepts a String as an argument. 
+    // The goal is to convert the string to 'binary' based on one condition: For each char in the String if a char on either side of it is the same, convert it to a '1'. 
+    // If neither of the chars on either side are the same, convert it to a '0'. 
+    // As characters are converted, their value as their original character should be preserved.
+    
+    public static void main(String[] args) {
+        
+        System.out.println(stringToBinary("appalachia"));
+        // Expected output: 0110000000
+        
+        System.out.println(stringToBinary("occurrence"));
+        // Expected output: 0110110000
+        
+        System.out.println(stringToBinary("mooooo"));
+        // Expected output: 011111
+        
+    }
+    
+    public static String stringToBinary(String s){
+        
+        String result = "";
+        
+        for (int i = 0; i < s.length() - 1; i++){
+            if (s.charAt(i) == s.charAt(i + 1) || (i > 0 && s.charAt(i) == s.charAt(i - 1)) ){
+                result += "1";
+            } else {
+                result += "0";
+            }
+        }
+        
+        return result;
+        
+    }
+    
+}
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
