@@ -845,13 +845,19 @@ function revrot(str, sz) {
 // Encode("masterpiece",1939);  ==>  [ 14, 10, 22, 29, 6, 27, 19, 18, 6, 12, 8]
 
 function encode(str,  n){
-  let alph = 'abcdefghijklmnopqrstuvwxyz';
+  let alphaStr = 'abcdefghijklmnopqrstuvwxyz';
   let result = [];
   let nStr = n.toString();
   for (let i = 0; i < str.length; i++){
-    result[i] = parseInt(alph.indexOf(str[i]) + 1) + parseInt(nStr[i % nStr.length]);
+    result[i] = parseInt(alphaStr.indexOf(str[i]) + 1) + parseInt(nStr[i % nStr.length]);
   }
   return result;
+}
+
+
+let alphaStr = 'abcdefghijklmnopqrstuvwxyz';
+for (let i = 0; i < alphaStr.length; i++){
+  console.log([i + 1, alphaStr[i]])
 }
 
 // https://www.codewars.com/kata/592e830e043b99888600002d (dcieslak)
@@ -900,3 +906,42 @@ function encode(str,  n){
 // }
 
 // https://www.codewars.com/kata/587136ba2eefcb92a9000027
+
+function checkDenoms(arr){
+  return arr.every((int) => int === arr[0]);
+}
+
+function convertFrac(lst){
+  const result = [];
+  const numerators = [];
+  const denominators = []; 
+  
+  for (let i = 0; i < lst.length; i++){
+    numerators[i] = lst[i][0];
+    denominators[i] = lst[i][1];
+  }
+  
+  let i = 0;
+
+  do {
+      if (checkDenoms(denominators)){
+          // done
+          // for (let j = 0; j < denominators.length; j++){
+          //     result[j] = [numerators[j], denominators[j]]
+          // }
+          break;
+      }
+      denominators.map((int) => int * 2);
+      numerators.map((int) => int++);
+      i++;
+      console.log(numerators)
+      console.log(denominators)
+  } while (checkDenoms(denominators));
+  
+  return result;
+
+}
+
+var lst = [ [1, 2], [1, 3], [1, 4] ]
+
+console.log(convertFrac(lst))
