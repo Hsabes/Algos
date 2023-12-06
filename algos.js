@@ -866,6 +866,65 @@ for (let i = 0; i < alphaStr.length; i++){
 // ************************************************************************************************
 // ================================================================================================
 
+// New Cashier Does Not Know About Space or Shift (6 Kyu)
+
+// Some new cashiers started to work at your restaurant.
+// They are good at taking orders, but they don't know how to capitalize words, or use a space bar!
+// All the orders they create look something like this:
+
+// "milkshakepizzachickenfriescokeburgerpizzasandwichmilkshakepizza"
+
+// The kitchen staff are threatening to quit, because of how difficult it is to read the orders.
+// Their preference is to get the orders as a nice clean string with spaces and capitals like so:
+
+// "Burger Fries Chicken Pizza Pizza Pizza Sandwich Milkshake Milkshake Coke"
+
+// The kitchen staff expect the items to be in the same order as they appear in the menu.
+// The menu items are fairly simple, there is no overlap in the names of the items:
+
+// 1. Burger
+// 2. Fries
+// 3. Chicken
+// 4. Pizza
+// 5. Sandwich
+// 6. Onionrings
+// 7. Milkshake
+// 8. Coke
+
+function countOccurences(string, substring){
+  return string.split(substring).length - 1;
+}
+
+function getOrder(input) {
+  let menu = {
+    1: 'burger',
+    2: 'fries',
+    3: 'chicken',
+    4: 'pizza',
+    5: 'sandwich',
+    6: 'onionrings',
+    7: 'milkshake',
+    8: 'coke'
+  }
+  
+  let result = "";
+  
+  for (const menuItem in menu){
+    if (input.includes(menu[menuItem])){
+      result += `${menu[menuItem][0].toUpperCase() + menu[menuItem].substring(1)} `.repeat(countOccurences(input, menu[menuItem]))
+    }
+  }
+  
+  return result.trim();
+  
+}
+
+// https://www.codewars.com/kata/5d23d89906f92a00267bb83d (jackdcasey)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
@@ -913,8 +972,8 @@ function checkDenoms(arr){
 
 function convertFrac(lst){
   const result = [];
-  const numerators = [];
-  const denominators = []; 
+  let numerators = [];
+  let denominators = []; 
   
   for (let i = 0; i < lst.length; i++){
     numerators[i] = lst[i][0];
@@ -931,12 +990,12 @@ function convertFrac(lst){
           // }
           break;
       }
-      denominators.map((int) => int * 2);
-      numerators.map((int) => int++);
+      denominators = denominators.map((int) => int * 2);
+      numerators = numerators.map((int) => int += 1);
       i++;
       console.log(numerators)
       console.log(denominators)
-  } while (checkDenoms(denominators));
+  } while (i < 3);
   
   return result;
 
