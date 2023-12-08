@@ -925,6 +925,49 @@ function getOrder(input) {
 // ************************************************************************************************
 // ================================================================================================
 
+// The old switcheroo (7 Kyu)
+
+// Write a function vowel2index(str)
+// that takes in a string and replaces all the vowels [a,e,i,o,u] with their respective positions within that string.
+// E.g:
+
+// vowel2index('this is my string') == 'th3s 6s my str15ng'
+// vowel2index('Codewars is the best site in the world') == 'C2d4w6rs 10s th15 b18st s23t25 27n th32 w35rld'
+// vowel2index('') == ''
+// Your function should be case insensitive to the vowels.
+
+function vowel2index(str) {
+  let result = "";
+  for (let i = 0; i < str.length; i++){
+    if (/[aeiouAEIOU]/.test(str[i])){
+      result += `${i + 1}`;
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+}
+
+function vowel2index(str) {
+  return str.split("").map((letter, i) => {
+    if (/[aeiouAEIOU]/.test(letter)){
+      return `${i + 1}`
+    } else {
+      return letter;
+    }
+  }).join("");
+}
+
+function vowel2index(str) {
+  return str.replace(/[aeiouAEIOU]/g, (l, i) => i + 1);
+}
+
+// https://www.codewars.com/kata/55d410c492e6ed767000004f (joh_pot)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
