@@ -962,6 +962,8 @@ function vowel2index(str) {
   return str.replace(/[aeiouAEIOU]/g, (l, i) => i + 1);
 }
 
+console.log(vowel2index("cAps and lOwErcasE"))
+
 // https://www.codewars.com/kata/55d410c492e6ed767000004f (joh_pot)
 
 // ================================================================================================
@@ -1047,3 +1049,17 @@ function convertFrac(lst){
 var lst = [ [1, 2], [1, 3], [1, 4] ]
 
 console.log(convertFrac(lst))
+
+function incrementString (strng) {
+  let result = "";
+  if ((/[0-9]/).test(strng[strng.length - 1])){
+    let match = strng.match(/(\d+)(?!.*\d)/);
+    let num = match[0];
+    result = strng.slice(0, match.index) + ((parseInt(num)) + 1).toString().padStart(num.length, '0');
+  } else {
+    result = strng + '1';
+  }
+  return result;
+}
+
+console.log(incrementString('hi01'))
