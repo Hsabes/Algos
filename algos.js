@@ -970,6 +970,40 @@ console.log(vowel2index("cAps and lOwErcasE"))
 // ************************************************************************************************
 // ================================================================================================
 
+// String incrementer (5 Kyu)
+
+// Your job is to write a function which increments a string, to create a new string.
+
+// If the string already ends with a number, the number should be incremented by 1.
+// If the string does not end with a number. the number 1 should be appended to the new string.
+// Examples:
+
+// foo -> foo1
+// foobar23 -> foobar24
+// foo0042 -> foo0043
+// foo9 -> foo10
+// foo099 -> foo100
+
+// Attention: If the number has leading zeros the amount of digits should be considered.
+
+function incrementString (strng) {
+  let result = "";
+  if ((/[0-9]/).test(strng[strng.length - 1])){
+    let match = strng.match(/(\d+)(?!.*\d)/);
+    let num = match[0];
+    result = strng.slice(0, match.index) + ((parseInt(num)) + 1).toString().padStart(num.length, '0');
+  } else {
+    result = strng + '1';
+  }
+  return result;
+}
+
+// https://www.codewars.com/kata/54a91a4883a7de5d7800009c (parceval)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
@@ -1050,16 +1084,3 @@ var lst = [ [1, 2], [1, 3], [1, 4] ]
 
 console.log(convertFrac(lst))
 
-function incrementString (strng) {
-  let result = "";
-  if ((/[0-9]/).test(strng[strng.length - 1])){
-    let match = strng.match(/(\d+)(?!.*\d)/);
-    let num = match[0];
-    result = strng.slice(0, match.index) + ((parseInt(num)) + 1).toString().padStart(num.length, '0');
-  } else {
-    result = strng + '1';
-  }
-  return result;
-}
-
-console.log(incrementString('hi01'))
