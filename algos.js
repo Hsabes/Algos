@@ -1029,6 +1029,49 @@ function beggars(values, n){
 // ************************************************************************************************
 // ================================================================================================
 
+// longest_palindrome (6 Kyu)
+
+// Find the length of the longest substring in the given string s that is the same in reverse.
+// As an example, if the input was “I like racecars that go fast”, the substring (racecar) length would be 7.
+// If the length of the input string is 0, the return value must be 0.
+
+// Example:
+// "a" -> 1 
+// "aab" -> 2  
+// "abcde" -> 1
+// "zzbaabcd" -> 4
+// "" -> 0
+
+function isPalindrome(subStr){
+  let revStr = ""
+  for (let i = subStr.length - 1; i >= 0; i--){
+    revStr += subStr[i];
+  }
+  return revStr === subStr;
+}
+
+function longestPalindrome(s){
+  if (s.length < 2){
+      return s.length;
+  }
+  let longest = "";
+  for (let i = 0; i < s.length; i++){
+    for (let j = 1; j < s.length; j++){
+      let subStr = s.slice(i, j + 1);
+      if (isPalindrome(subStr) && subStr.length > longest.length){
+        longest = subStr;
+      }
+    }
+  }
+  return longest.length;
+}
+
+// https://www.codewars.com/kata/54bb6f887e5a80180900046b (kgashok)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
