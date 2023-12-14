@@ -1072,6 +1072,29 @@ function longestPalindrome(s){
 // ************************************************************************************************
 // ================================================================================================
 
+// If you can read this... (6 Kyu)
+
+// Convert a string to it's phonetic translation, separated by white space. 
+
+function to_nato(words) {
+  words = words.replace(/\s/g, "").toLowerCase();
+  let result = "";
+	for (let i = 0; i < words.length; i++){
+    if (/[a-z]/.test(words[i])){
+      result += `${NATO[words[i]]} `
+    } else {
+      result += `${words[i]} `
+    }
+  }
+  return result.trim();
+}
+
+// https://www.codewars.com/kata/586538146b56991861000293 (henryhamon)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
