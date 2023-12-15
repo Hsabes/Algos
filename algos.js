@@ -1095,6 +1095,33 @@ function to_nato(words) {
 // ************************************************************************************************
 // ================================================================================================
 
+// Reverse every other word in the string (6 Kyu)
+
+// Reverse every other word in a given string, then return the string. 
+// Throw away any leading or trailing whitespace, while ensuring there is exactly one space between each word. 
+// Punctuation marks should be treated as if they are a part of the word in this kata.
+
+function reverseStringByIndex(word, index){
+  if (index % 2 !== 0){
+    let reversedWord = "";
+    for (let i = word.length - 1; i >= 0; i--){
+      reversedWord += word[i];
+    }
+    return reversedWord;
+  }
+  return word;
+}
+
+function reverse(str){
+  return str.split(" ").map((word, index) => reverseStringByIndex(word, index)).join(" ").trim();
+}
+
+// https://www.codewars.com/kata/58d76854024c72c3e20000de (Confettimaker)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
