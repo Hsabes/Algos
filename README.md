@@ -4,7 +4,6 @@ A list of problems I have solved on CodeWars.com with their solutions
 Each problem will be structured as follows:
 
 Poblem Title (Problem Difficulty)  
-`<br>`
 Problem Description  
 Solution (some may include commentary on new things I learned while solving that particular problem)  
 Problem Link (Credit)  
