@@ -1122,6 +1122,19 @@ function reverse(str){
 // ************************************************************************************************
 // ================================================================================================
 
+function deleteNth(arr,n){
+  let result = [];
+  let counts = {};
+  for (let i = 0; i < arr.length; i++){
+    let number = arr[i];
+    counts[number] = counts[number] ? counts[number] + 1 : 1;
+    if (counts[number] <= n){
+      result.push(number)
+    }
+  }
+  return result;
+}
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
