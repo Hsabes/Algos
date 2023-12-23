@@ -1135,6 +1135,24 @@ function deleteNth(arr,n){
   return result;
 }
 
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+function bingo(ticket, win){
+  let count = 0;
+  for (let i = 0; i < ticket.length; i++){
+    let subArr = ticket[i];
+    let str = subArr[0];
+    for (let j = 0; j < str.length; j++){
+      if (str.charCodeAt(j) === subArr[1]){
+        count++;
+      }
+    }
+  }
+  return count >= win ? 'Winner!' : 'Loser!';
+}
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
