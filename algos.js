@@ -176,8 +176,6 @@ function expandedForm(num) {
   for (i = 0; i < num.length; i++){
     if (num[i] !== '0'){
       nums.push(`${num[i]}${'0'.repeat(num.length - i - 1)}`);
-    } else {
-      nums.push('0'); // optional
     }
   }
   return nums.join(" + ")
@@ -1233,3 +1231,29 @@ var lst = [ [1, 2], [1, 3], [1, 4] ]
 
 console.log(convertFrac(lst))
 
+function atm(value) {
+  
+  let amount = parseInt(value.match(/[0-9]+/g)[0]);
+  let currency = value.match(/[a-zA-Z]+/g).join("").toUpperCase();
+  let notes = VALUES[currency];
+    
+  if (!notes){
+    return `Sorry, have no ${currency}.`
+  } else if (amount % notes[0] !== 0){
+    return `Can't do ${amount} ${currency}. Value must be divisible by ${notes[0]}!`;
+  }
+  
+  let result = "";
+  
+  for (let i = notes.length - 1; i >= 0; i--){
+    if (amount >= notes[i]){
+      result += `${Math.floor(amount / notes[i])} * ${notes[i]} ${currency}, `
+      amount -= (Math.floor(amount / notes[i]) * notes[i]);
+    } else {
+      continue;
+    }
+  }
+  
+  return result.substring(0, result.length - 2);
+  
+}
