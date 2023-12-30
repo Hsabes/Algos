@@ -292,9 +292,9 @@ function multipleOfIndex(array) {
 // ************************************************************************************************
 // ================================================================================================
 
-// Consecutive Strings (6 Kyu)
+// Generate All Permutations
 
-function permute(array) {
+function permute(array, int) {
   var length = array.length, // length of array
       result = [array.slice()], // nests original array inside a new array
       c = new Array(length).fill(0), // fills a new array with N 0's
@@ -317,7 +317,7 @@ function permute(array) {
   return result;
 }
 
-console.log(permute([1, 2, 3]));
+console.log(permute([50, 55, 56, 57, 58],));
 
 // ================================================================================================
 // ************************************************************************************************
@@ -1137,6 +1137,19 @@ function deleteNth(arr,n){
 // ************************************************************************************************
 // ================================================================================================
 
+// Lottery Ticket (6 Kyu)
+
+// Given a lottery ticket (ticket), represented by an array of 2-value arrays, you must find out if you've won the jackpot.
+
+// Example ticket:
+
+// [ [ 'ABC', 65 ], [ 'HGR', 74 ], [ 'BYHT', 74 ] ]
+// To do this, you must first count the 'mini-wins' on your ticket. Each subarray has both a string and a number within it. If the character code of any of the characters in the string matches the number, you get a mini win. Note you can only have one mini win per sub array.
+
+// Once you have counted all of your mini wins, compare that number to the other input provided (win). If your total is more than or equal to (win), return 'Winner!'. Else return 'Loser!'.
+
+// All inputs will be in the correct format. Strings on tickets are not always the same length.
+
 function bingo(ticket, win){
   let count = 0;
   for (let i = 0; i < ticket.length; i++){
@@ -1150,6 +1163,113 @@ function bingo(ticket, win){
   }
   return count >= win ? 'Winner!' : 'Loser!';
 }
+
+// https://www.codewars.com/kata/57f625992f4d53c24200070e (PG1)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// ATM money counter (6 Kyu)
+
+// Imagine that we have ATM with multiple currencies. The users can withdraw money of in any currency that the ATM has.
+
+// Our function must analyze the currency and value of what the users wants, and give money to the user starting from bigger values to smaller. The ATM gives the least amount of notes possible.
+
+// This kata has a preloaded dictionary of possible bank note values for different currencies (RUB, EUR, UAH, USD, CUP, SOS):
+
+// const VALUES = { "EUR": [5, 10, 20, 50, 100, 200, 500], "USD": ... }
+// // Note: VALUES and its internal arrays are frozen, don't try to mutate them
+// The function should return a string containing how many bank notes of each value the ATM will give out, for example:
+
+// "8 * 100 USD, 2 * 20 USD, 1 * 2 USD"
+// If it can't do that because there are no notes for this value, it should return:
+
+// "Can't do *value* *currency*. Value must be divisible by *amount*!"
+// (replace *value*, *currency* and *amount* with the relevant details)
+
+// If it doesn't have the requested currency at all, it should return:
+
+// "Sorry, have no *currency*."
+
+function atm(value) {
+  
+  let amount = parseInt(value.match(/[0-9]+/g)[0]);
+  const currency = value.match(/[a-zA-Z]+/g).join("").toUpperCase();
+  const notes = CURRENCIES[currency];
+    
+  if (!notes){
+    return `Sorry, have no ${currency}.`
+  } else if (amount % notes[0] !== 0){
+    return `Can't do ${amount} ${currency}. Value must be divisible by ${notes[0]}!`;
+  }
+  
+  let result = "";
+  
+  for (let i = notes.length - 1; i >= 0; i--){
+    if (amount >= notes[i]){
+      result += `${Math.floor(amount / notes[i])} * ${notes[i]} ${currency}, `
+      amount -= (Math.floor(amount / notes[i]) * notes[i]);
+    } else {
+      continue;
+    }
+  }
+  
+  return result.substring(0, result.length - 2);
+  
+}
+
+// https://www.codewars.com/kata/5665a6a07b5afe0aba00003a (ost-k)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Consecutive Strings (6 Kyu)
+
+// You are given an array(list) strarr of strings and an integer k. Your task is to return the first longest string consisting of k consecutive strings taken in the array.
+
+// Examples:
+// strarr = ["tree", "foling", "trashy", "blue", "abcdef", "uvwxyz"], k = 2
+
+// Concatenate the consecutive strings of strarr by 2, we get:
+
+// treefoling   (length 10)  concatenation of strarr[0] and strarr[1]
+// folingtrashy ("      12)  concatenation of strarr[1] and strarr[2]
+// trashyblue   ("      10)  concatenation of strarr[2] and strarr[3]
+// blueabcdef   ("      10)  concatenation of strarr[3] and strarr[4]
+// abcdefuvwxyz ("      12)  concatenation of strarr[4] and strarr[5]
+
+// Two strings are the longest: "folingtrashy" and "abcdefuvwxyz".
+// The first that came is "folingtrashy" so 
+// longest_consec(strarr, 2) should return "folingtrashy".
+
+// In the same way:
+// longest_consec(["zone", "abigail", "theta", "form", "libe", "zas", "theta", "abigail"], 2) --> "abigailtheta"
+// n being the length of the string array, if n = 0 or k > n or k <= 0 return "" (return Nothing in Elm, "nothing" in Erlang).
+
+// Note
+// consecutive strings : follow one after another without an interruption
+
+function longestConsec(strarr, k) {
+  if (k <= 0){
+    return "";
+  }
+  let result = "";
+  for (let i = 0; i <= strarr.length - k; i++){
+    let tempStr = strarr.slice(i, i + k).join("");
+    if (tempStr.length > result.length){
+      result = tempStr;
+    }
+  }
+  return result;
+}
+
+// https://www.codewars.com/kata/56a5d994ac971f1ac500003e (g964)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // for later:
 
@@ -1229,31 +1349,7 @@ function convertFrac(lst){
 
 var lst = [ [1, 2], [1, 3], [1, 4] ]
 
-console.log(convertFrac(lst))
+console.log(convertFrac(lst));
 
-function atm(value) {
-  
-  let amount = parseInt(value.match(/[0-9]+/g)[0]);
-  let currency = value.match(/[a-zA-Z]+/g).join("").toUpperCase();
-  let notes = VALUES[currency];
-    
-  if (!notes){
-    return `Sorry, have no ${currency}.`
-  } else if (amount % notes[0] !== 0){
-    return `Can't do ${amount} ${currency}. Value must be divisible by ${notes[0]}!`;
-  }
-  
-  let result = "";
-  
-  for (let i = notes.length - 1; i >= 0; i--){
-    if (amount >= notes[i]){
-      result += `${Math.floor(amount / notes[i])} * ${notes[i]} ${currency}, `
-      amount -= (Math.floor(amount / notes[i]) * notes[i]);
-    } else {
-      continue;
-    }
-  }
-  
-  return result.substring(0, result.length - 2);
-  
-}
+const CURRENCIES = {};
+
