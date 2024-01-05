@@ -1370,7 +1370,7 @@ function gap(g, m, n) {
 // ************************************************************************************************
 // ================================================================================================
 
-// AUTHORED KATA
+// **AUTHORED KATA**
 
 // Yahtzee: Did You Make the Upper Section? (7 Kyu)
 
@@ -1462,6 +1462,14 @@ describe("isPassingUpper",function() {
     }
     
 })});
+
+// Things learned from this experience:
+// Input mutation is a thing. This can be avoided by passing a copy of the input to the user, and passing the actual input into the tester functions.
+// If your iterator involves writing a lot of el = arr[i], just do a for...of loop.
+// Be VERY attentative to the description...
+// Never close an issue unless you're sure your fix is correct.
+// Prepend tester functions with something to make it stand out more that it's a tester function, ie testIsPassingUpper or refIsPassingUpper
+// JSON.stringify() will show the array with brackets instead of wrapping them yourself
 
 // https://www.codewars.com/kata/6596c9a292fe7904dd3e5dfb (Authored by me: Hsabes)
 
