@@ -294,7 +294,7 @@ function multipleOfIndex(array) {
 
 // Generate All Permutations
 
-function permute(array, int) {
+function permute(array) {
   var length = array.length, // length of array
       result = [array.slice()], // nests original array inside a new array
       c = new Array(length).fill(0), // fills a new array with N 0's
@@ -317,7 +317,7 @@ function permute(array, int) {
   return result;
 }
 
-console.log(permute([50, 55, 56, 57, 58],));
+console.log(permute([1, 2, 3, 4, 5, 0]));
 
 // ================================================================================================
 // ************************************************************************************************
@@ -1343,6 +1343,132 @@ function updateInventory(curStock, newStock) {
 // ************************************************************************************************
 // ================================================================================================
 
+function isPrime(num) {
+  for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return num > 1;
+}
+
+function gap(g, m, n) {
+  let prevPrime = 0;
+  for (let i = m; i <= n; i++){
+    if (isPrime(i)){
+      if (i - prevPrime === g){
+        return [prevPrime, i];
+      } else {
+        prevPrime = i;
+      }
+    }
+  }
+  return null;
+}
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// AUTHORED KATA
+
+// Yahtzee: Did You Make the Upper Section? (7 Kyu)
+
+// In the game of Yahtzee, there are two sections: The upper section and the lower section. Players roll 5 dice each turn and fill in various fields with the appropriate scores. Finally, they total up the score in each section and whoever has the highest cumulative score wins the game.
+
+// In this Kata we are only focusing on calculating the total score of the upper section. The upper section is comprised of six fields for each side of the dice (1 through 6). Every turn you score a field by summing the values of the dice that show the corresponding field. For example, if you were to roll 3 twos you would have a score of 6 in the twos field (2 * 3 = 6). If the total sum of each field in the upper section is greater than or equal to 63, the player receives a bonus of 35 points.
+
+// Assume the game has already been played and you are now adding up your scores. Suppose each field in the upper section doesn’t contain the total score of each field, but rather the amount of dice you rolled for that specific field.
+
+// For input [2, 3, 3, 4, 2, 3, 2]:
+// Ones:   2 => (1 * 2 = 2)
+// Twos:   3 => (2 * 3 = 6)
+// Threes: 3 => (3 * 3 = 9)
+// Fours:  4 => (4 * 4 = 16)
+// Fives:  2 => (5 * 2 = 10)
+// Sixes:  3 => (6 * 3 = 18)
+// Total:  2 + 6 + 9 + 16 + 10 + 18 = 63/63
+// Result: Pass
+// Given the number of dice rolled per field where 0 <= diceRolledPerField <= 5, determine whether or not you receive the 35 points bonus. Return true if you do, false otherwise. You can assume that the array will always be in order such that ones are first and sixes are last.
+
+// Examples:
+
+// [3, 3, 3, 3, 3, 3] => true (total score is 63/63)
+// [2, 3, 4, 3, 3, 3] => true (total score is 66/63)
+// [3, 4, 2, 2, 3, 2] => false (total score is 52/63)
+// Optional bonus: Can you do it without calculating the total score for the upper section (in other words, checking if the total score >= 63)?
+
+// SOLUTION
+
+function isPassingUpper(arr){
+  let count = 0
+  for (let i = 0; i < arr.length; i++){
+    count += (arr[i] - 3) * (i + 1);
+  }
+  return count >= 0;
+}
+
+// TESTING
+
+const chai = require("chai"),
+      assert = chai.assert;
+
+describe("isPassingUpper",function() {
+  it("Randomized Tests",function() {  
+    
+    function isPassingUpperTester(arr){
+      let count = 0
+      for (let i = 0; i < arr.length; i++){
+        count += (arr[i] - 3) * (i + 1);
+      }
+      return count >= 0;
+    }
+    
+    function permute(array) {
+      var length = array.length,
+          result = [array.slice()],
+          c = new Array(length).fill(0),
+          i = 1, k, p;
+
+      while (i < length) {
+        if (c[i] < i) {
+          k = i % 2 && c[i];
+          p = array[i];
+          array[i] = array[k];
+          array[k] = p;
+          c[i]++;
+          i = 1;
+          result.push(array.slice());
+        } else {
+          c[i] = 0;
+          i++;
+        }
+      }
+      return result;
+    }
+    
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+    
+    let rolls = permute(shuffleArray([0,1,2,3,4,5]))
+    
+    for (const roll of rolls){
+      assert.deepEqual(isPassingUpper([...roll]), isPassingUpperTester(roll), `Roll ${JSON.stringify(roll)}`);               
+    }
+    
+})});
+
+// https://www.codewars.com/kata/6596c9a292fe7904dd3e5dfb (Authored by me: Hsabes)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
@@ -1384,44 +1510,101 @@ function updateInventory(curStock, newStock) {
 
 // https://www.codewars.com/kata/587136ba2eefcb92a9000027
 
-function checkDenoms(arr){
-  return arr.every((int) => int === arr[0]);
-}
+// function checkDenoms(arr){
+//   return arr.every((int) => int === arr[0]);
+// }
 
-function convertFrac(lst){
-  const result = [];
-  let numerators = [];
-  let denominators = []; 
+// function convertFrac(lst){
+//   const result = [];
+//   let numerators = [];
+//   let denominators = []; 
   
-  for (let i = 0; i < lst.length; i++){
-    numerators[i] = lst[i][0];
-    denominators[i] = lst[i][1];
+//   for (let i = 0; i < lst.length; i++){
+//     numerators[i] = lst[i][0];
+//     denominators[i] = lst[i][1];
+//   }
+  
+//   let i = 0;
+
+//   do {
+//       if (checkDenoms(denominators)){
+//           // done
+//           // for (let j = 0; j < denominators.length; j++){
+//           //     result[j] = [numerators[j], denominators[j]]
+//           // }
+//           break;
+//       }
+//       denominators = denominators.map((int) => int * 2);
+//       numerators = numerators.map((int) => int += 1);
+//       i++;
+//       console.log(numerators)
+//       console.log(denominators)
+//   } while (i < 3);
+  
+//   return result;
+
+// }
+
+// var lst = [ [1, 2], [1, 3], [1, 4] ]
+
+// console.log(convertFrac(lst));
+
+function isPassingUpper(arr){
+  let count = 0
+  for (let i = 0; i < arr.length; i++){
+    count += arr[i] * (i + 1)
   }
-  
-  let i = 0;
-
-  do {
-      if (checkDenoms(denominators)){
-          // done
-          // for (let j = 0; j < denominators.length; j++){
-          //     result[j] = [numerators[j], denominators[j]]
-          // }
-          break;
-      }
-      denominators = denominators.map((int) => int * 2);
-      numerators = numerators.map((int) => int += 1);
-      i++;
-      console.log(numerators)
-      console.log(denominators)
-  } while (i < 3);
-  
-  return result;
-
+  console.log(count);
+  return count >= 63;
 }
 
-var lst = [ [1, 2], [1, 3], [1, 4] ]
+console.log(isPassingUpper([3, 4, 2, 2, 3, 2]))
 
-console.log(convertFrac(lst));
+function permute(array) {
+  var length = array.length, // length of array
+      result = [array.slice()], // nests original array inside a new array
+      c = new Array(length).fill(0), // fills a new array with N 0's
+      i = 1, k, p; // initializes 3 variables. i = 0, k = undefined, p = undefined
 
-const CURRENCIES = {};
+  while (i < length) { // while i < length
+    if (c[i] < i) { // if array filled with 0's at index of [i] (initially 0) is less than i (intially 1) (guaranteed to run the first time)
+      k = i % 2 && c[i]; // if i is even, set value of k to 0. If it is odd, set it to the value of c[i]
+      p = array[i]; // temporarily saves the value of array[i]
+      array[i] = array[k]; // changes the value of array[i] () to array[k]
+      array[k] = p;
+      c[i]++;
+      i = 1;
+      result.push(array.slice());
+    } else {
+      c[i] = 0;
+      i++;
+    }
+  }
+  return result;
+}
 
+
+for (let i = 0; i < permute([0,1,2,3,4,5]).length; i++){
+  console.log(i)
+  let rolls = permute([0,1,2,3,4,5]);
+  console.log(isPassingUpper(rolls[i]));
+}
+
+
+function isPassingUpper(arr){
+  let count = 0
+  for (let i = 0; i < arr.length; i++){
+    count += (arr[i] - 3) * (i + 1);
+  }
+  return count >= 0;
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+console.log(shuffleArray([0,1,2,3,4,5]))
