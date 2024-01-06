@@ -1616,3 +1616,59 @@ function shuffleArray(array) {
 }
 
 console.log(shuffleArray([0,1,2,3,4,5]))
+
+// function getDivisors(num){
+//   const divisorsSquared = [];
+//   for (let i = 0; i <= num; i++){
+//     if (num % i === 0){
+//       divisorsSquared.push(Math.pow(i , 2))
+//     }
+//   }
+//   let sum = divisorsSquared.reduce((a, b) => a + b, 0)
+//   if (Math.sqrt(sum, 2) % 1 === 0){
+//     return [num, sum];
+//   }
+// }
+
+// function listSquared(m, n) {
+//   let divisors = [n];
+//   let result = [];
+//   for (let i = m; i <= n / 2; i++){
+//     divisors.push(i)
+//   }
+//   console.log(divisors)
+//   for (let i = 0; i < divisors.length; i++){
+//     result.push(getDivisors(divisors[i]))
+//   }
+  
+//   return result.filter((x) => !!x);
+// }
+
+function areDivisorsSquare(num) {
+  const divisorsSquared = [];
+  for (let i = 1; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      divisorsSquared.push(Math.pow(i, 2));
+      if (i !== num / i) {
+        divisorsSquared.push(Math.pow(num / i, 2));
+      }
+    }
+  }
+  let sum = divisorsSquared.reduce((a, b) => a + b, 0) || 1;
+  if (Math.sqrt(sum) % 1 === 0){
+    return [num, sum]
+  }
+}
+
+function listSquared(m, n) {
+  const result = [];
+  for (let i = m; i <= n; i++) {
+    const divisors = areDivisorsSquare(i);
+    if (divisors) {
+      result.push(divisors);
+    }
+  }
+  return result;
+}
+
+listSquared(1, 250)
