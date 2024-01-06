@@ -82,6 +82,52 @@ function dirReduc(arr){
 // ************************************************************************************************
 // ================================================================================================
 
+// Integers: Recreation One (5 Kyu)
+
+// 1, 246, 2, 123, 3, 82, 6, 41 are the divisors of number 246. Squaring these divisors we get: 1, 60516, 4, 15129, 9, 6724, 36, 1681. The sum of these squares is 84100 which is 290 * 290.
+
+// Task
+// Find all integers between m and n (m and n integers with 1 <= m <= n) such that the sum of their squared divisors is itself a square.
+
+// We will return an array of subarrays or of tuples (in C an array of Pair) or a string. The subarrays (or tuples or Pairs) will have two elements: first the number the squared divisors of which is a square and then the sum of the squared divisors.
+
+// Example:
+// list_squared(1, 250) --> [[1, 1], [42, 2500], [246, 84100]]
+// list_squared(42, 250) --> [[42, 2500], [246, 84100]]
+
+function areDivisorsSquare(num) {
+  const divisorsSquared = [];
+  for (let i = 1; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      divisorsSquared.push(Math.pow(i, 2));
+      if (i !== num / i) {
+        divisorsSquared.push(Math.pow(num / i, 2));
+      }
+    }
+  }
+  let sum = divisorsSquared.reduce((a, b) => a + b, 0) || 1;
+  if (Math.sqrt(sum) % 1 === 0){
+    return [num, sum]
+  }
+}
+
+function listSquared(m, n) {
+  const result = [];
+  for (let i = m; i <= n; i++) {
+    const divisors = areDivisorsSquare(i);
+    if (divisors) {
+      result.push(divisors);
+    }
+  }
+  return result;
+}
+
+// https://www.codewars.com/kata/55aa075506463dac6600010d (g964)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // Word a10n (abbreviation) (6 Kyu)
 
 // The word i18n is a common abbreviation of internationalization in the developer community, used instead of typing the whole word and trying to spell it correctly. Similarly, a11y is an abbreviation of accessibility.
@@ -1366,6 +1412,8 @@ function gap(g, m, n) {
   return null;
 }
 
+console.log(gap(2,100,110))
+
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
@@ -1476,6 +1524,18 @@ describe("isPassingUpper",function() {
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
+
+
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+function validPhoneNumber(phoneNumber){
+  return /^\(\d{3}\)\s\d{3}-\d{4}$/.test(phoneNumber);
+}
+
+validPhoneNumber
 
 // for later:
 
@@ -1644,31 +1704,3 @@ console.log(shuffleArray([0,1,2,3,4,5]))
 //   return result.filter((x) => !!x);
 // }
 
-function areDivisorsSquare(num) {
-  const divisorsSquared = [];
-  for (let i = 1; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) {
-      divisorsSquared.push(Math.pow(i, 2));
-      if (i !== num / i) {
-        divisorsSquared.push(Math.pow(num / i, 2));
-      }
-    }
-  }
-  let sum = divisorsSquared.reduce((a, b) => a + b, 0) || 1;
-  if (Math.sqrt(sum) % 1 === 0){
-    return [num, sum]
-  }
-}
-
-function listSquared(m, n) {
-  const result = [];
-  for (let i = m; i <= n; i++) {
-    const divisors = areDivisorsSquare(i);
-    if (divisors) {
-      result.push(divisors);
-    }
-  }
-  return result;
-}
-
-listSquared(1, 250)
