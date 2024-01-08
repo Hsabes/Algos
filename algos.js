@@ -1523,19 +1523,165 @@ describe("isPassingUpper",function() {
 
 // ================================================================================================
 // ************************************************************************************************
-// ================================================================================================
+// ================================================================================================\
 
+// Valid Phone Number (6 Kyu)
 
+// Write a function that accepts a string, and returns true if it is in the form of a phone number.
+// Assume that any integer from 0-9 in any of the spots will produce a valid phone number.
 
-// ================================================================================================
-// ************************************************************************************************
-// ================================================================================================
+// Only worry about the following format:
+// (123) 456-7890 (don't forget the space after the close parentheses)
+
+// Examples:
+
+// "(123) 456-7890"  => true
+// "(1111)555 2345"  => false
+// "(098) 123 4567"  => false
 
 function validPhoneNumber(phoneNumber){
   return /^\(\d{3}\)\s\d{3}-\d{4}$/.test(phoneNumber);
 }
 
-validPhoneNumber
+validPhoneNumber();
+
+// https://www.codewars.com/kata/525f47c79f2f25a4db000025 (xDranik)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Help the bookseller! (6 Kyu)
+
+// A bookseller has lots of books classified in 26 categories labeled A, B, ... Z. Each book has a code c of 3, 4, 5 or more characters. The 1st character of a code is a capital letter which defines the book category.
+
+// In the bookseller's stocklist each code c is followed by a space and by a positive integer n (int n >= 0) which indicates the quantity of books of this code in stock.
+
+// For example an extract of a stocklist could be:
+
+// L = {"ABART 20", "CDXEF 50", "BKWRK 25", "BTSQZ 89", "DRTYM 60"}.
+// or
+// L = ["ABART 20", "CDXEF 50", "BKWRK 25", "BTSQZ 89", "DRTYM 60"] or ....
+// You will be given a stocklist (e.g. : L) and a list of categories in capital letters e.g :
+
+// M = {"A", "B", "C", "W"} 
+// or
+// M = ["A", "B", "C", "W"] or ...
+// and your task is to find all the books of L with codes belonging to each category of M and to sum their quantity according to each category.
+
+// For the lists L and M of example you have to return the string (in Haskell/Clojure/Racket/Prolog a list of pairs):
+
+// (A : 20) - (B : 114) - (C : 50) - (W : 0)
+// where A, B, C, W are the categories, 20 is the sum of the unique book of category A, 114 the sum corresponding to "BKWRK" and "BTSQZ", 50 corresponding to "CDXEF" and 0 to category 'W' since there are no code beginning with W.
+
+// If L or M are empty return string is "" (Clojure/Racket/Prolog should return an empty array/list instead).
+
+
+
+function stockList(listOfArt, listOfCat){
+  let res = "";
+  if (!listOfArt.length || !listOfCat.length){
+    return res;
+  }
+  for (let i = 0; i < listOfCat.length; i++){
+    let total = 0;
+    let category = listOfCat[i];;
+    for (let j = 0; j < listOfArt.length; j++){
+      let arr = listOfArt[j].split(" ");
+      let code = arr[0];
+      let quantity = parseInt(arr[1])
+      if (code[0] === category){
+        total += quantity;
+      }
+    }
+    res += `(${category} : ${total}) - `
+  }
+  return res.slice(0, -3);
+}
+
+stockList()
+
+// https://www.codewars.com/kata/54dc6f5a224c26032800005c (g964)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Reverse Linked List (6 Kyu)
+
+// Let's say we have a singly linked list.
+// Empty list is represented by null or equivalent (nil in Ruby).
+// Non-empty list is represented by 2-element array [value, tail].
+
+// So for example list with values 1, 2, 3 would be represented as [1, [2, [3, null]]].
+
+// Your job is to develop function reverseList which returns elements of given list in reverse order without modification of the original list.
+
+// P.S. Make sure your solution works on huge lists.
+
+function reverseLinkedList(list){
+  let node = null;
+  while (list){
+    node = [list[0], node];
+    list = list[1]
+  }
+  return node;
+}
+
+reverseLinkedList()
+
+// https://www.codewars.com/kata/52f6be83172a8ba0be000342 (vgrichina)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Linked Lists - Length and Count (6 Kyu)
+
+// Linked Lists - Length & Count
+
+// Implement Length() to count the number of nodes in a linked list.
+
+// length(null) => 0
+// length(1 -> 2 -> 3 -> null) => 3
+// Implement Count() to count the occurrences of an integer in a linked list.
+
+// count(null, 1) => 0
+// count(1 -> 2 -> 3 -> null, 1) => 1
+// count(1 -> 1 -> 1 -> 2 -> 2 -> 2 -> 2 -> 3 -> 3 -> null, 2) => 4
+// I've decided to bundle these two functions within the same Kata since they are both very similar.
+
+function Node(data) {
+  console.log(data)
+  this.data = data;
+  this.next = null;
+}
+
+function length(head) {
+  let length = 0;
+  while (head){
+    length++
+    head = head.next;
+  }
+  return length;
+}
+
+function count(head, data) {
+  let count = 0;
+  while (head){
+    if (head.data === data){
+      count++
+    }
+    head = head.next;
+  }
+  return count;
+}
+
+// https://www.codewars.com/kata/55beec7dd347078289000021 (JDeBolt)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
 
 // for later:
 
@@ -1577,130 +1723,3 @@ validPhoneNumber
 // }
 
 // https://www.codewars.com/kata/587136ba2eefcb92a9000027
-
-// function checkDenoms(arr){
-//   return arr.every((int) => int === arr[0]);
-// }
-
-// function convertFrac(lst){
-//   const result = [];
-//   let numerators = [];
-//   let denominators = []; 
-  
-//   for (let i = 0; i < lst.length; i++){
-//     numerators[i] = lst[i][0];
-//     denominators[i] = lst[i][1];
-//   }
-  
-//   let i = 0;
-
-//   do {
-//       if (checkDenoms(denominators)){
-//           // done
-//           // for (let j = 0; j < denominators.length; j++){
-//           //     result[j] = [numerators[j], denominators[j]]
-//           // }
-//           break;
-//       }
-//       denominators = denominators.map((int) => int * 2);
-//       numerators = numerators.map((int) => int += 1);
-//       i++;
-//       console.log(numerators)
-//       console.log(denominators)
-//   } while (i < 3);
-  
-//   return result;
-
-// }
-
-// var lst = [ [1, 2], [1, 3], [1, 4] ]
-
-// console.log(convertFrac(lst));
-
-function isPassingUpper(arr){
-  let count = 0
-  for (let i = 0; i < arr.length; i++){
-    count += arr[i] * (i + 1)
-  }
-  console.log(count);
-  return count >= 63;
-}
-
-console.log(isPassingUpper([3, 4, 2, 2, 3, 2]))
-
-function permute(array) {
-  var length = array.length, // length of array
-      result = [array.slice()], // nests original array inside a new array
-      c = new Array(length).fill(0), // fills a new array with N 0's
-      i = 1, k, p; // initializes 3 variables. i = 0, k = undefined, p = undefined
-
-  while (i < length) { // while i < length
-    if (c[i] < i) { // if array filled with 0's at index of [i] (initially 0) is less than i (intially 1) (guaranteed to run the first time)
-      k = i % 2 && c[i]; // if i is even, set value of k to 0. If it is odd, set it to the value of c[i]
-      p = array[i]; // temporarily saves the value of array[i]
-      array[i] = array[k]; // changes the value of array[i] () to array[k]
-      array[k] = p;
-      c[i]++;
-      i = 1;
-      result.push(array.slice());
-    } else {
-      c[i] = 0;
-      i++;
-    }
-  }
-  return result;
-}
-
-
-for (let i = 0; i < permute([0,1,2,3,4,5]).length; i++){
-  console.log(i)
-  let rolls = permute([0,1,2,3,4,5]);
-  console.log(isPassingUpper(rolls[i]));
-}
-
-
-function isPassingUpper(arr){
-  let count = 0
-  for (let i = 0; i < arr.length; i++){
-    count += (arr[i] - 3) * (i + 1);
-  }
-  return count >= 0;
-}
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-console.log(shuffleArray([0,1,2,3,4,5]))
-
-// function getDivisors(num){
-//   const divisorsSquared = [];
-//   for (let i = 0; i <= num; i++){
-//     if (num % i === 0){
-//       divisorsSquared.push(Math.pow(i , 2))
-//     }
-//   }
-//   let sum = divisorsSquared.reduce((a, b) => a + b, 0)
-//   if (Math.sqrt(sum, 2) % 1 === 0){
-//     return [num, sum];
-//   }
-// }
-
-// function listSquared(m, n) {
-//   let divisors = [n];
-//   let result = [];
-//   for (let i = m; i <= n / 2; i++){
-//     divisors.push(i)
-//   }
-//   console.log(divisors)
-//   for (let i = 0; i < divisors.length; i++){
-//     result.push(getDivisors(divisors[i]))
-//   }
-  
-//   return result.filter((x) => !!x);
-// }
-
