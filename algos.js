@@ -1620,12 +1620,12 @@ stockList()
 // P.S. Make sure your solution works on huge lists.
 
 function reverseLinkedList(list){
-  let node = null;
+  let result = null;
   while (list){
-    node = [list[0], node];
+    result = [list[0], result];
     list = list[1]
   }
-  return node;
+  return result;
 }
 
 reverseLinkedList()
@@ -1677,11 +1677,40 @@ function count(head, data) {
   return count;
 }
 
+function length(head, num = 0) {
+  if (head){
+    return length(head.next, num + 1);
+  }
+  return num;
+}
+
+function count(head, data, num = 0) {
+  if (head){
+    return head.data === data ? 
+      count(head.next, data, num + 1) : 
+      count(head.next, data, num);
+  }
+  return num;
+}
+
+length()
+count()
+
 // https://www.codewars.com/kata/55beec7dd347078289000021 (JDeBolt)
 
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
+
+function tribonacci(signature,n){
+  let length = signature.length;
+  for (let i = 0; i < n - length; i++){
+    signature.push(signature.slice(i, i + 3).reduce((a, b) => a + b, 0));
+  }
+  return signature.slice(0, n);
+}
+
+tribonacci();
 
 // for later:
 
