@@ -1712,6 +1712,54 @@ function tribonacci(signature,n){
 
 tribonacci();
 
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+function stringTransformer(str) {
+  let strArr = str.split(" ").reverse().join(" ");
+  let res = "";
+  for (let i = 0; i < strArr.length; i++){
+    let char = strArr[i];
+    if (char === char.toUpperCase() && char !== char.toLowerCase()){
+      res += char.toLowerCase();
+    } else {
+      res += char.toUpperCase();
+    }
+  }
+  return res;
+}
+
+stringTransformer();
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// LeetCode 459.Repeated Substring Pattern
+
+var repeatedSubstringPattern = function(s) {
+  for (let i = 0; i < Math.floor(s.length / 2); i++){
+      let len = i + 1;
+      if (s.length % len){
+          continue;
+      }
+      let substr = s.substring(0, len);
+      let regex = new RegExp(substr, 'g');
+      if (s.match(regex).join('') === s){
+          return true;
+      }
+  }
+  return false;
+};
+
+repeatedSubstringPattern()
+
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
