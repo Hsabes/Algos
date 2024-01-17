@@ -1760,6 +1760,37 @@ repeatedSubstringPattern()
 // ************************************************************************************************
 // ================================================================================================
 
+var isValid = function(s) {
+  if (s.length % 2){
+      return false;
+  }
+  while (s.includes('()') || s.includes('{}') || s.includes('[]')){
+      s = s.replaceAll('()', '');
+      s = s.replaceAll('{}', '');
+      s = s.replaceAll('[]', '');
+  }
+  return !s.length
+};
+
+isValid()
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+var searchInsert = function(nums, target) {
+  if (nums[nums.length - 1] < target){
+      return nums.length;
+  }
+  for (let i = 0; i <= nums.length; i++){
+      if (nums[i] >= target){
+          return i;
+      }
+  }
+};
+
+searchInsert();
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
@@ -1800,3 +1831,4 @@ repeatedSubstringPattern()
 // }
 
 // https://www.codewars.com/kata/587136ba2eefcb92a9000027
+
