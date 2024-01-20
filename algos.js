@@ -1791,6 +1791,81 @@ var searchInsert = function(nums, target) {
 
 searchInsert();
 
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+var searchMatrix = function(matrix, target) {
+  let lastRow = matrix[matrix.length - 1]
+  if (matrix[0][0] > target || lastRow[lastRow.length - 1] < target){
+      return false;
+  }
+  for (let i = 0; i < matrix.length; i++){
+      let subArr = matrix[i];
+      if (subArr.includes(target)){
+          return true;
+      }
+      if (target < subArr[subArr.length - 1]){
+          return false;
+      }
+  }
+};
+
+searchMatrix();
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// extract portion of file name (6 Kyu)
+
+// You have to extract a portion of the file name as follows:
+
+// Assume it will start with date represented as long number
+// Followed by an underscore
+// You'll have then a filename with an extension
+// it will always have an extra extension at the end
+// Inputs:
+// 1231231223123131_FILE_NAME.EXTENSION.OTHEREXTENSION
+
+// 1_This_is_an_otherExample.mpg.OTHEREXTENSIONadasdassdassds34
+
+// 1231231223123131_myFile.tar.gz2
+// Outputs
+// FILE_NAME.EXTENSION
+
+// This_is_an_otherExample.mpg
+
+// myFile.tar
+// Acceptable characters for random tests:
+
+// abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-0123456789
+
+class FileNameExtractor {
+  static extractFileName (s) {
+      s = s.slice(s.match('_').index + 1);
+      return s.split('.').slice(0, 2).join('.')
+  }
+}
+
+class FileNameExtractor {
+  static extractFileName (s) {
+      return s.slice(s.indexOf('_') + 1, s.lastIndexOf('.'));
+  }
+}
+
+function extractFileName(s){
+  return s.slice(s.indexOf('_') + 1, s.lastIndexOf('.'));
+}
+
+extractFileName()
+
+// https://www.codewars.com/kata/597770e98b4b340e5b000071 (Javatlacati)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
