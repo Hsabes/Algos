@@ -1866,6 +1866,108 @@ extractFileName()
 // ************************************************************************************************
 // ================================================================================================
 
+var splitInParts = function(s, partLength){
+  const res = [];
+  for (let i = 0; i < s.length; i += partLength){
+    res.push(s.substring(i, i + partLength));
+  }
+  return res.join(' ');
+}
+
+splitInParts()
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+function deepCount(arr){
+  let count = arr?.length;
+  for (let i = 0; i < count; i++){
+    if (Array.isArray(arr[i])){
+      count += deepCount(arr[i]);
+    }
+  }
+  return count;
+}
+
+function deepCount(arr){
+  let count = 0;
+  for (let i = 0; i < arr.length; i++){
+    count++;
+    if (Array.isArray(arr[i])){
+      count += deepCount(arr[i]);
+    }
+  }
+  return count;
+}
+
+deepCount();
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Prize Draw (6 Kyu)
+
+// To participate in a prize draw each one gives his/her firstname.
+// Each letter of a firstname has a value which is its rank in the English alphabet. A and a have rank 1, B and b rank 2 and so on.
+// The length of the firstname is added to the sum of these ranks hence a number som.
+// An array of random weights is linked to the firstnames and each som is multiplied by its corresponding weight to get what they call a winning number.
+
+// Example:
+// names: "COLIN,AMANDBA,AMANDAB,CAROL,PauL,JOSEPH"
+// weights: [1, 4, 4, 5, 2, 1]
+
+// PauL -> som = length of firstname + 16 + 1 + 21 + 12 = 4 + 50 -> 54
+// The *weight* associated with PauL is 2 so PauL's *winning number* is 54 * 2 = 108.
+// Now one can sort the firstnames in decreasing order of the winning numbers. When two people have the same winning number sort them alphabetically by their firstnames.
+
+// Task:
+// parameters: st a string of firstnames, we an array of weights, n a rank
+
+// return: the firstname of the participant whose rank is n (ranks are numbered from 1)
+
+// Example:
+// names: "COLIN,AMANDBA,AMANDAB,CAROL,PauL,JOSEPH"
+// weights: [1, 4, 4, 5, 2, 1]
+// n: 4
+// The function should return: "PauL"
+
+// Notes:
+// The weight array is at least as long as the number of names, it may be longer.
+// If st is empty return "No participants".
+// If n is greater than the number of participants then return "Not enough participants".
+
+function calculateRank(name, length){
+  const alpha = "abcdefghijklmnopqrstuvwxyz";
+  let result = length;
+  for (let i = 0; i < name.length; i++){
+    result += alpha.indexOf(name[i]) + 1;
+  }
+  return result;
+}
+
+function rank(st, we, n) {
+  if (!st) return "No participants";
+  if (we.length < n) return "Not enough participants";
+  const winningNums = [];
+  const names = st.split(',');
+  for (let i = 0; i < names.length; i++){
+    let name = names[i];
+    winningNums.push({name: name, score: (calculateRank(name.toLowerCase(), name.length)) * we[i]})
+  }
+  const sorted = winningNums.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+  return sorted[n - 1].name;
+}
+
+rank();
+
+// https://www.codewars.com/kata/5616868c81a0f281e500005c (g964)
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
 // for later:
 
 // player moves associated die rolls (die1 and die2)
