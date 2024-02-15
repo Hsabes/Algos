@@ -1086,6 +1086,8 @@ function beggars(values, n){
 // "zzbaabcd" -> 4
 // "" -> 0
 
+// BRUTE FORCE
+
 function isPalindrome(subStr){
   let revStr = ""
   for (let i = subStr.length - 1; i >= 0; i--){
@@ -1778,6 +1780,31 @@ isValid()
 // ************************************************************************************************
 // ================================================================================================
 
+// Search Insert Position (EASY)
+
+// Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+// You must write an algorithm with O(log n) runtime complexity.
+
+// Example 1:
+
+// Input: nums = [1,3,5,6], target = 5
+// Output: 2
+// Example 2:
+
+// Input: nums = [1,3,5,6], target = 2
+// Output: 1
+// Example 3:
+
+// Input: nums = [1,3,5,6], target = 7
+// Output: 4
+ 
+// Constraints:
+
+// 1 <= nums.length <= 104
+// -104 <= nums[i] <= 104
+// nums contains distinct values sorted in ascending order.
+// -104 <= target <= 104
+
 var searchInsert = function(nums, target) {
   if (nums[nums.length - 1] < target){
       return nums.length;
@@ -1791,9 +1818,21 @@ var searchInsert = function(nums, target) {
 
 searchInsert();
 
+// 35. Search Insert Position (LeetCode)
+
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
+
+// Search a 2D Matrix (MEDIUM)
+
+// You are given an m x n integer matrix matrix with the following two properties:
+
+// Each row is sorted in non-decreasing order.
+// The first integer of each row is greater than the last integer of the previous row.
+// Given an integer target, return true if target is in matrix or false otherwise.
+
+// You must write a solution in O(log(m * n)) time complexity.
 
 var searchMatrix = function(matrix, target) {
   let lastRow = matrix[matrix.length - 1]
@@ -1812,6 +1851,8 @@ var searchMatrix = function(matrix, target) {
 };
 
 searchMatrix();
+
+// 74. Search a 2D Matrix (LeetCode)
 
 // ================================================================================================
 // ************************************************************************************************
@@ -1866,6 +1907,24 @@ extractFileName()
 // ************************************************************************************************
 // ================================================================================================
 
+// Split In Parts (7 Kyu)
+
+// The aim of this kata is to split a given string into different strings of equal size (note size of strings is passed to the method)
+
+// Example:
+
+// Split the below string into other strings of size #3
+
+// 'supercalifragilisticexpialidocious'
+
+// Will return a new string
+// 'sup erc ali fra gil ist ice xpi ali doc iou s'
+// Assumptions:
+
+// String length is always greater than 0
+// String has no spaces
+// Size is always positive
+
 var splitInParts = function(s, partLength){
   const res = [];
   for (let i = 0; i < s.length; i += partLength){
@@ -1876,9 +1935,22 @@ var splitInParts = function(s, partLength){
 
 splitInParts()
 
+// https://www.codewars.com/kata/5650ab06d11d675371000003 (bmw318mt)
+
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
+
+// Array Deep Count (6 Kyu)
+
+// You are given an array. Complete the function that returns the number of ALL elements within an array, including any nested arrays.
+
+// Examples
+// []                   -->  0
+// [1, 2, 3]            -->  3
+// ["x", "y", ["z"]]    -->  4
+// [1, 2, [3, 4, [5]]]  -->  7
+// The input will always be an array.
 
 function deepCount(arr){
   let count = arr?.length;
@@ -1902,6 +1974,8 @@ function deepCount(arr){
 }
 
 deepCount();
+
+// https://www.codewars.com/kata/596f72bbe7cd7296d1000029 (hannahcmtucker)
 
 // ================================================================================================
 // ************************************************************************************************
@@ -1967,6 +2041,163 @@ rank();
 // ================================================================================================
 // ************************************************************************************************
 // ================================================================================================
+
+// 5. Longest Palindromic Substring (MEDIUM)
+
+// Given a string s, return the longest palindromic substring
+
+// PERFORMANT SOLUTION
+
+function getLongest(s, left, right){
+  while (left >= 0 && right < s.length && s[left] === s[right]){ // while left is in bounds and right is in bounds
+      left--;
+      right++;
+  }
+  return right - left - 1; // return length of longest, from which you can get start and end indeces
+}
+
+function longestPalindrome(s){
+  if (!s){
+      return "";
+  }
+  let startPoint = 0;
+  let endPoint = 0;
+  for (let i = 0; i < s.length; i++){
+      let even = getLongest(s, i, i + 1); // get longest even length palindrome
+      let odd = getLongest(s, i, i); // get longest odd length palindrome
+      // odd starts at i and i + 1 otherwise we miss potential palindromes
+      let longest = Math.max(even, odd); // longest length between longest even and longest odd
+          console.log('-')
+          console.log('longest: ' + longest)
+
+      if (longest > endPoint - startPoint){ // if longest > current longest (end - start)
+          startPoint = i - Math.floor((longest - 1) / 2); 
+          // subtract length of first half of palindrome from i to get start index
+              console.log('start pointer: ' + startPoint)
+              console.log('index: ' + i)
+          endPoint = i + Math.floor(longest / 2); 
+          // add length of second half of palindrome to i to get
+              console.log('end pointer: ' + endPoint)
+              console.log('current longest palindrome length: ' + (endPoint - startPoint))
+      } else {
+          console.log('palindrome is not longest')
+      }
+  }
+  return s.substring(startPoint, endPoint + 1);
+}
+
+function getLongest(s, left, right){
+  while (left >= 0 && right < s.length && s[left] === s[right]){
+      left--;
+      right++;
+  }
+  return right - left - 1;
+}
+
+function longestPalindrome(s){
+  if (!s){
+      return "";
+  }
+  let startPoint = 0;
+  let endPoint = 0;
+  for (let i = 0; i < s.length; i++){
+      let evenLongest = getLongest(s, i, i + 1);
+      let oddLongest = getLongest(s, i, i);
+      let longest = Math.max(evenLongest, oddLongest); 
+
+      if (longest > endPoint - startPoint){
+          startPoint = i - Math.floor((longest - 1) / 2); 
+          endPoint = i + Math.floor(longest / 2); 
+      }
+  }
+  return s.substring(startPoint, endPoint + 1);
+}
+
+longestPalindrome()
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+function travel(r, zipcode) {
+  const ads = r.split(',');
+  let streetNums = [];
+  let streets = [];
+  for (let i = 0; i < ads.length; i++){
+    let ad = ads[i];
+    if (ad.substring(ad.length - 8) === zipcode){
+      streetNums.push(ad.substring(ad.indexOf(" "), -1))
+      streets.push(ad.substring(ad.indexOf(" ") + 1, ad.length - 9));
+    }
+  }
+  return `${zipcode}:${streets.join(",")}/${streetNums.join().trim()}`
+}
+
+travel();
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+var findWordsContaining = function(words, x) {
+  const result = [];
+  for (let i = 0; i < words.length ; i++){
+      let word = words[i];
+      if (word.includes(x)){
+          result.push(i);
+          continue;
+      }
+  }
+  return result;
+};
+
+findWordsContaining();
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+var shuffle = function(nums, n) {
+  let result = [];
+  for (let i = 0; i < n; i++){
+      result.push(nums[i], nums[i + n]);
+  }
+  return result;
+};
+
+shuffle();
+
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// Sum of Cubes (7 Kyu)
+
+// Write a function that takes a positive integer n, sums all the cubed values from 1 to n (inclusive), and returns that sum.
+
+// Assume that the input n will always be a positive integer.
+
+// Examples: (Input --> output)
+
+// 2 --> 9 (sum of the cubes of 1 and 2 is 1 + 8)
+// 3 --> 36 (sum of the cubes of 1, 2, and 3 is 1 + 8 + 27)
+
+function sumCubes(n){
+  let range = [...Array(n + 1).keys()];
+  return range.map((x) => x*x*x).reduce((a, b) => a + b);
+}
+
+function sumCubes(n){
+  return n <= 1 ? n**3 : sumCubes(n - 1) + n**3;
+}
+
+function sumCubes(n){
+  return (n * (n + 1) / 2) ** 2;
+}
+
+sumCubes();
+
+// https://www.codewars.com/kata/59a8570b570190d313000037 (MementoMori)
 
 // for later:
 
