@@ -2240,3 +2240,38 @@ sumCubes();
 
 // https://www.codewars.com/kata/587136ba2eefcb92a9000027
 
+// ================================================================================================
+// ************************************************************************************************
+// ================================================================================================
+
+// 1437. Check If All 1's Are at Least Length K Places Away (LeetCode)
+
+// Given an binary array nums and an integer k, return true if all 1's are at least k places away from each other, otherwise return false.
+
+// Input: nums = [1,0,0,0,1,0,0,1], k = 2
+// Output: true
+// Explanation: Each of the 1s are at least 2 places away from each other.
+
+var kLengthApart = function(nums, k) {
+    let counter = 0;
+    let found = false;
+    for (let i = 0; i < nums.length; i++) {
+        let num = nums[i];
+        if (num || found){
+            if (num && found) {
+                if (counter < k){
+                    return false;
+                }
+                counter = 0;
+            }
+            if (!found){
+                found = true;
+            }
+            if (!num && found) {
+                counter++;
+            }
+        }
+    }
+    return true;
+};
+
